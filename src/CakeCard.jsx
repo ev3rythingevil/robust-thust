@@ -1,19 +1,10 @@
 import { useState } from 'react';
 
-function CakeCard({cake}){
-    console.log(cake)
-    const [selected , setSelected] = useState(null);
-    
-    function handleClick(){
-       if(!selected){
-           setSelected({border: "3px solid black"})
-       } else {
-           setSelected(null)
-       }
-    } 
+function CakeCard({cake , setSelectedCake}){
+
     
       return(
-          <div onClick = {handleClick} style={selected}>    
+          <div onClick={() => setSelectedCake(cake)}>    
            <h1>{cake.flavor}</h1> 
            <h1>{cake.price}</h1>
            <p>{cake.size}</p>
