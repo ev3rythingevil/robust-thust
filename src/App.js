@@ -4,24 +4,31 @@ import Search from "./Search";
 import { cakes } from "./data";
 import { useState} from 'react';
 import CakeDetail from "./CakeDetail";
+import CakeForm from "./CakeForm";
 
 
 function App() {
   const [visible, setVisible] = useState(false);
   const [selectedCake , setSelectedCake] = useState(null)
+  const [cakeList, setCakes] = useState(cakes);
+  
+  function handleAddCake(cake){
+    setCakes([
+      ...cakeList, cake
+    ])
+  }
 
   return ( 
     <>
     <Header />
+    <CakeForm handleAddCake={handleAddCake}/>
     {visible? <Search /> : null}
     <button onClick={() => setVisible(!visible)}>{visible?'x' : 'Form'}</button>
     <br></br>
     {selectedCake? <CakeDetail cake={selectedCake} /> : null}
-    {cakes.map(cake => <CakeCard cake={cake} setSelectedCake={setSelectedCake}/> )}
+    {cakeList.map(cake => <CakeCard cake={cake} setSelectedCake={setSelectedCake}/> )}
   </>
   );
-
-  
 }
 
 export default App;
